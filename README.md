@@ -24,3 +24,24 @@ minukube start
 kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
 kubectl get pods
+
+
+ kubectl expose deployments/userapi --type="NodePort" --port 3000
+
+ kubectl get services
+
+ minikube ip
+
+ minikube service userapi
+
+ docker ignore !!!
+
+
+ kubectl apply -f samples/addons
+ kubectl rollout status deployment/kiali -n istio-system
+
+
+ kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.12/samples/addons/grafana.yaml
+
+
+ kubectl get svc -n istio-system
