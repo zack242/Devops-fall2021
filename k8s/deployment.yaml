@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: userapi
+spec:
+  selector:
+    matchLabels:
+      app: userapi
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: userapi
+    spec:
+      containers:
+        - name: projectece
+          image: zack242/devopszak4:latest
+          ports:
+            - containerPort: 3000
+        - name: master
+          image: redis
+          command:
+            - redis-server
+          ports:
+            - containerPort: 6379
+          volumeMounts:
+          - mountPath: "/path/to"
+            name: task-pv-storage
+
+      volumes:
+        - name: task-pv-storage
+          persistentVolumeClaim:
+            claimName: task-pv-claim
