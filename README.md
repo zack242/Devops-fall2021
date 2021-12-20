@@ -8,3 +8,6 @@ use virtualbox
 vagrant up
 
 vagrant ssh devops_server
+
+docker build -t devopszak .
+docker images
