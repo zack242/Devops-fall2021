@@ -7,7 +7,7 @@ const port = 3000
 
 const db = require('./dbClient')
 db.on("error", (err) => {
-  console.error(err)
+//  console.error(err)
 })
 
 app.use(bodyParser.urlencoded({
@@ -21,7 +21,7 @@ app.use('/user', userRouter)
 
 const server = app.listen(port, (err) => {
   if (err) throw err
-  console.log("Server listening the port " + port)
+  console.log("Server listening the portA " + port)
 })
 
 process.on('SIGINT', () => {
