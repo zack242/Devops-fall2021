@@ -15,7 +15,7 @@ email : dan.nezri@edu.ece.fr <br>
 
 ### 1. Create a web application
 
-- We used as support the lab 4 of DevOps, Where the front end will show us a Hello world page.
+- We used as support the lab 4 of DevOps, where the front end will show us a Hello world page.
 
 ### 2. Apply CI/CD pipeline
 
