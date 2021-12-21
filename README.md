@@ -30,7 +30,7 @@ We configurated our workflows to deploy our application in heroku after the Cont
 <img src = "images/CI-CD.png" width = 500 align="center" alt ="CI-CD">
 
 In heroku, we created an application and this is the dashboard
-<img src = "images/HerokuDashboard.jpg" width = 500 alt ="herokuDashboard">
+<img src = "images/HerokuDashboard.png" width = 500 alt ="herokuDashboard">
 
 If we go on Heroku we got a link and we can see our application.
 <img src = "images/HerokuDeployement.png" width = 500 alt ="heroku deployment">
@@ -70,39 +70,49 @@ config.vm.provision "ansible_local" do |ansible|
 end
 ```
 We try to do the provision of <br>
-#language runtime
-#database
-#your application (use sync folders)
-#health check of your application
+##language runtime
+##database
+##your application (use sync folders)
+##health check of your application
 
 But sadly, we didn't success !
 
 ### 4. Build Docker image of your application
+Docker is a set of platform as a service (PaaS) products that use OS-level virtualization to deliver software in packages called containers.<br>
 
-First we used DockerDestop we run on our cli in the correct folder :
+We created an image of our application using docker :
 ```
-docker build -t dockerfile
+docker build -t devopszak .
 ```
-We get on our DockerDestop the following image :
-<img src = "images/4.1.jpg" width = 600 alt ="screen lab">
+<img src = "images/builddocker.png" width = 600 alt ="docker build">
+We get see our docker image using : <br>
+```
+docker images
+```
 
-We run on the correct port using this command.
-```
-docker run -p 3000:3000 -d dockerfile
-```
-And we get : <br>
-<img src = "images/4.2.jpg" width = 600 alt ="screen lab">
+<img src = "images/images.png" width = 600 alt ="images docker">
 
-Then we want to implement it on dockerhub https://hub.docker.com/<br>
-my profile name is arthur92i and link it to my dockerdestop
-I push the image on it :
+We can run our images using : <br>
 ```
-docker tag dockerfile arthur92i/Dockerfile
-docker push arthur92i/dockerfile
+docker run -dp 3000:3000  devopszak
+```
+
+And we get acces to it at  : <br>
+```
+127.0.0.1:3000
+```
+<img src = "images/rundocker.png" width = 600 alt ="run docker">
+
+Now we push the image of our application in the dockerhub https://hub.docker.com/, but before that we need to configure a .dockerignore file to avoid pushing not necessary files <br>
+
+We tag our image and after we push it : <br>
+```
+docker tag devopszak  zack242/devopszak
+docker push zack242/devopszak
 ```
 And get this on my page.
 
-<img src = "images/4.3.jpg" width = 600 alt ="screen lab">
+<img src = "images/dockerhub.png" width = 600 alt ="docker hub">
 
 ### 5. Make container orchestration using Docker Compose
 
