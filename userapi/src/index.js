@@ -21,7 +21,7 @@ app.use('/user', userRouter)
 
 const server = app.listen(port, (err) => {
   if (err) throw err
-  console.log("Server listening the portA " + port)
+  console.log("Server listening the port " + port)
 })
 
 process.on('SIGINT', () => {

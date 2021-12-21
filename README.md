@@ -1,47 +1,108 @@
-# DevOps
-Reppsitory for course of Devops with Adaltas
+# Project of Devops
 
-3 IOC
-vagrant :
-vagrant box add centos/7
-use virtualbox
+Repository of our project of DevOps
+
+## Students
+
+Zakaria Tozy <br>
+email : Zakaria.tozy@edu.ece.fr <br>
+
+Dan Nezri <br>
+email : dan.nezri@edu.ece.fr <br>
+
+
+## Projet
+
+### 1. Create a web application
+
+We used as support the lab 4 of DevOps, Where the front end will show us a Hello world page.
+
+### 2. Apply CI/CD pipeline
+
+We want to implement Continuous integration and Continuous Delivery so :<br>
+-For the Continuous integration We implemented a main.yaml file which allows us to configure github action.Github action will perform tests at each push or pull request on the main branch <br>
+
+<img src = "images/githubaction.png" width = 500 alt ="github-action">
+
+
+- For the Continuous Delivery, We used Heroku : https://dashboard.heroku.com.
+We configurated our workflows to deploy our application in heroku after the Continuous Testing.<br>
+
+<img src = "images/CI-CD.png" width = 500 align="center" alt ="CI-CD">
+
+In heroku, we created an application and this is the dashboard
+<img src = "images/HerokuDashboard.jpg" width = 500 alt ="herokuDashboard">
+If we go on Heroku we got a link and we can see our application.
+<img src = "images/HerokuDeployement" width = 500 alt ="heroku deployment">
+
+### 3. Configure and provision a virtual environment and run your application using the IaC approach
+
+We used the lab on Vagrant and the index on Ansible for configure our vagrant file. We used powershell as a CLI.
+```
 vagrant up
+```
+Then it's running a virtual machine.
+<img src = "images/3.1.jpg" width = 600 alt ="screen lab">
 
-vagrant ssh devops_server
+### 4. Build Docker image of your application
 
-docker build -t devopszak .
-docker images
+First we used DockerDestop we run on our cli in the correct folder :
+```
+docker build -t dockerfile
+```
+We get on our DockerDestop the following image :
+<img src = "images/4.1.jpg" width = 600 alt ="screen lab">
 
-docker run -dp 3000:3000  devopszak4
+We run on the correct port using this command.
+```
+docker run -p 3000:3000 -d dockerfile
+```
+And we get : <br>
+<img src = "images/4.2.jpg" width = 600 alt ="screen lab">
 
-docker tag devopszak4  zack242/devopszak4
-docker push zack242/devopszak4
+Then we want to implement it on dockerhub https://hub.docker.com/<br>
+my profile name is arthur92i and link it to my dockerdestop
+I push the image on it :
+```
+docker tag dockerfile arthur92i/Dockerfile
+docker push arthur92i/dockerfile
+```
+And get this on my page.
 
-docker-compose up
+<img src = "images/4.3.jpg" width = 600 alt ="screen lab">
 
+### 5. Make container orchestration using Docker Compose
 
-minukube start
+We add a file docker-compose.yaml for the container orchestration and using the following command :
+```
+docker-compose up -d
+```
+on the localhost we find again the Hello World
+<img src = "images/5.1.jpg" width = 600 alt ="screen lab">
+And on the DockerDestop we have also now a devops running :
+<img src = "images/5.2.jpg" width = 600 alt ="screen lab">
+
+### 6. Make docker orchestration using Kubernetes
+
+We implement a new folder call k8s where our deployment.yaml and our services.yaml. After using the following command for activating our minikube :
+```
+minikube start
 kubectl apply -f deployment.yaml
-kubectl apply -f service.yaml
+kubectl apply -f services.yaml
 kubectl get pods
+```
+We see the following pods running :
+<img src = "images/6.1.jpg" width = 600 alt ="screen lab">
 
+And with the command :
+```
+minikube ip
+```
+We get the following table that indicate the url and target port
+<img src = "images/6.2.jpg" width = 600 alt ="screen lab">
 
- kubectl expose deployments/userapi --type="NodePort" --port 3000
+And the following page open :
+<img src = "images/6.2.jpg" width = 600 alt ="screen lab">
+### 7. Make a service mesh using Istio
 
- kubectl get services
-
- minikube ip
-
- minikube service userapi
-
- docker ignore !!!
-
-
- kubectl apply -f samples/addons
- kubectl rollout status deployment/kiali -n istio-system
-
-
- kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.12/samples/addons/grafana.yaml
-
-
- kubectl get svc -n istio-system
+### 8. Implement Monitoring to your containerized application
