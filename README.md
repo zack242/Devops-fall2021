@@ -188,7 +188,16 @@ Wa apply this volume configuration to the pods of our deployment.
 
 - Install Prometheus and Grafana to your K8s cluster
 
+```
+kubectl apply -f samples/addons
+```
+
 <img src = "images/addons.png" width = 600 alt ="addons">
+
+
+```
+kubectl rollout status deployment/kiali -n istio-system
+```
 <img src = "images/addons2.png" width = 600 alt ="addons">
 
 - Sadly we didin't get acces to the grafana or Prometheus dashboard.
