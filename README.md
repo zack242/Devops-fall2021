@@ -182,7 +182,7 @@ And on the host :
 
 <img src = "images/istio2.png" width = 600 alt ="istio1">
 
-<img src = "images/deployementistio.png" width = 600 alt ="istio2">
+<img src = "images/deployementIstio.png" width = 600 alt ="istio2">
 
 - We didn't get 2 version of our app, for this we used the samples of the lab to the trafing-shifting and the route-request.
 
