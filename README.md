@@ -24,7 +24,6 @@ We want to implement Continuous integration and Continuous Delivery so :<br>
 
 <img src = "images/githubaction.png" width = 500 alt ="github-action">
 
-
 - For the Continuous Delivery, We used Heroku : https://dashboard.heroku.com.
 We configurated our workflows to deploy our application in heroku after the Continuous Testing.<br>
 
@@ -32,17 +31,51 @@ We configurated our workflows to deploy our application in heroku after the Cont
 
 In heroku, we created an application and this is the dashboard
 <img src = "images/HerokuDashboard.jpg" width = 500 alt ="herokuDashboard">
+
 If we go on Heroku we got a link and we can see our application.
-<img src = "images/HerokuDeployement" width = 500 alt ="heroku deployment">
+<img src = "images/HerokuDeployement.png" width = 500 alt ="heroku deployment">
 
 ### 3. Configure and provision a virtual environment and run your application using the IaC approach
 
-We used the lab on Vagrant and the index on Ansible for configure our vagrant file. We used powershell as a CLI.
+Vagrant is an open-source software product for building and maintaining portable virtual software development environments.We use vagrant with the centos7 distribution of linux,to configure the linux environment we use the following command.<br>
+
+```
+vagrant box add centos/7
+```
+chose the option 3 : virtual box.<br>
+
+Now we can run our vagrant configuration file using : <br>
 ```
 vagrant up
 ```
-Then it's running a virtual machine.
-<img src = "images/3.1.jpg" width = 600 alt ="screen lab">
+<img src = "images/vagrantup.png" width = 500 alt ="vagrant up">
+
+Now we can acces to our virtual machine using ssh : <br>
+```
+vagrant ssh devops_server
+```
+<img src = "images/ssh.png" width = 500 alt ="vagrant ssh">
+
+Ansible is an open-source software provisioning, configuration management, and application-deployment tool enabling infrastructure as code.<br>
+
+In our Vagrantfile,we configurate provision with Ansible
+
+```
+# Use Vagrant Ansible provisioner
+config.vm.provision "ansible_local" do |ansible|
+  # The path to the playbooks entry point
+  ansible.playbook = "playbooks/run.yml"
+  # Only run the roles with these tags
+  ansible.tags = "install"
+end
+```
+We try to do the provision of <br>
+#language runtime
+#database
+#your application (use sync folders)
+#health check of your application
+
+But sadly, we didn't success !
 
 ### 4. Build Docker image of your application
 
