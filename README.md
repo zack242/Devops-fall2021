@@ -29,7 +29,7 @@ We configurated our workflows to deploy our application in heroku after the Cont
 
 <img src = "images/CI-CD.png" width = 500 align="center" alt ="CI-CD">
 
-In heroku, we created an application and this is the dashboard
+- In heroku, we created an application and this is the dashboard
 <img src = "images/HerokuDashboard.png" width = 500 alt ="herokuDashboard">
 
 If we go on Heroku we got a link and we can see our application.
@@ -70,10 +70,10 @@ config.vm.provision "ansible_local" do |ansible|
 end
 ```
 We try to do the provision of <br>
-##language runtime
-##database
-##your application (use sync folders)
-##health check of your application
+- language runtime
+- database
+- your application (use sync folders)
+- health check of your application
 
 But sadly, we didn't success !
 
@@ -95,7 +95,6 @@ We can run our images using : <br>
 ```
 docker run -dp 3000:3000  devopszak
 ```
-
 And we get acces to it at  : <br>
 ```
 127.0.0.1:3000
@@ -123,7 +122,7 @@ docker-compose up
 ```
 <img src = "images/docker-composeup.png" width = 600 alt ="docker compsoe">
 
-And like for the image we can get acces to our application :
+And like for the docker image we can get acces to our application :
 ```
 127.0.0.1:3000
 ```
@@ -132,25 +131,64 @@ And like for the image we can get acces to our application :
 
 ### 6. Make docker orchestration using Kubernetes
 
-- We implement a new folder call k8s where our deployment.yaml and our services.yaml. After using the following command for activating our minikube :
+Kubernetes is an open-source container-orchestration system for automating computer application deployment, scaling, and management. <br> <br>
+
+- We implement a new folder call k8s where we set our Manifest yaml files
+(deployment.yaml and our services.yaml).After we use the following command to start minikube and apply our manifest files to our cluster : <br>
+
 ```
 minikube start
 kubectl apply -f deployment.yaml
 kubectl apply -f services.yaml
 kubectl get pods
 ```
-We see the following pods running :
-<img src = "images/6.1.jpg" width = 600 alt ="screen lab">
+We see the following pods running thanks to the commande kubectl get pods : <br>
 
-And with the command :
+<img src = "images/k8s.png" width = 600 alt ="k8s pods">
+
+And with the following comande :
 ```
+minikube service userapi
+
 minikube ip
 ```
-We get the following table that indicate the url and target port
-<img src = "images/6.2.jpg" width = 600 alt ="screen lab">
+We expose our Kubernetes service to the outside :
 
-And the following page open :
-<img src = "images/6.2.jpg" width = 600 alt ="screen lab">
+<img src = "images/openservice.png" width = 600 alt ="minikube ip">
+
+And on the host :
+```
+192.168.99.101:31406
+```
+We can find our application running :
+
+<img src = "images/k8shost.png" width = 600 alt ="k8shost">
+
+We also setup 2 different persistent volume :
+
+- PersistentVolume (PV) - a piece of storage in the cluster that has been provisioned by an administrator. It has a life cycle independent of any individual Pod that uses the PV.
+
+- PersistentVolumeClaim (PVC) - a request for storage by a user.
+
+Wa apply this volume configuration to the pods of our deployment.
+
 ### 7. Make a service mesh using Istio
 
+- Istio is an open source service mesh that layers transparently onto existing distributed applications.
+
+- We deploy your application using Istio :
+
+<img src = "images/istio2.png" width = 600 alt ="istio1">
+
+<img src = "images/deplyementistio.png" width = 600 alt ="istio2">
+
+- We didn't get 2 version of our app, for this we used the samples of the lab to the trafing-shifting and the route-request.
+
 ### 8. Implement Monitoring to your containerized application
+
+- Install Prometheus and Grafana to your K8s cluster
+
+<img src = "images/addons.png" width = 600 alt ="addons">
+<img src = "images/addons2.png" width = 600 alt ="addons">
+
+- Sadly we didin't get acces to the grafana or Prometheus dashboard.
